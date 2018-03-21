@@ -1,8 +1,7 @@
-import pandas as pd
 import numpy as np
 
 
-class FourierFit():
+class Fourier():
     """
     基底関数にフーリエ級数を用いた正則化最小二乗法
     """
@@ -21,11 +20,11 @@ class FourierFit():
         """
         計画行列の導出
         """
-        phi = pd.DataFrame(1/2 * np.ones(len(x)))
+        phi = 1/2 * np.ones([len(x), 1])
         for i in range(1, self.m+1):
             sin = np.sin(2.0*np.pi*i*x/self.t)
             cos = np.cos(2.0*np.pi*i*x/self.t)
-            phi = pd.concat([phi, sin, cos], axis=1)
+            phi = np.concatenate((phi, sin, cos), axis=1)
         return phi
 
     def fit(self, x, y):

@@ -14,7 +14,7 @@ class LogReg:
         self.alpha = alpha
         self.itr = itr
 
-    def sigmoid(self, x):
+    def _sigmoid(self, x):
         """
         sigmoid関数
         """
@@ -24,16 +24,16 @@ class LogReg:
         """
         logistiloss関数
         """
-        return -y*np.log(self.sigmoid(x)) - (1-y)*np.log(1-self.sigmoid(x))
+        return -y*np.log(self._sigmoid(x)) - (1-y)*np.log(1-self._sigmoid(x))
 
     def fit(self, x, y):
         """
         勾配法によってパラメータを決定
         """
-        self.theta = np.random.rand(len(x.T), 1)
+        self.theta = np.zeros([len(x.T), 1])
         pred_cost = self.logloss(x, y).sum()
         for i in range(self.itr):
-            tmp = self.sigmoid(x) - y
+            tmp = self._sigmoid(x) - y
             self.theta = self.theta - self.alpha * np.dot(x.T, tmp)
 
             cur_cost = self.logloss(x, y).sum()
@@ -45,4 +45,4 @@ class LogReg:
         """
         予測値の確率出力
         """
-        return self.sigmoid(x)
+        return self._sigmoid(x)
