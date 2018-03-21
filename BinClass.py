@@ -8,8 +8,10 @@ class LogReg:
 
     def __init__(self, alpha, itr):
         """
-        :param alpha: 正則化項の重み
-        :param itr: 勾配法の繰り返し回数
+        param
+        -----
+        * alpha: 学習率
+        * itr: 勾配法の繰り返し回数
         """
         self.alpha = alpha
         self.itr = itr
@@ -46,3 +48,11 @@ class LogReg:
         予測値の確率出力
         """
         return self._sigmoid(x)
+
+
+class perseptron:
+
+    def __init__(self, eta, itr, epocsize):
+        self.eta = eta
+        self.itr = itr
+        self.epocsize = epocsize

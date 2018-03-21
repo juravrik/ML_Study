@@ -8,9 +8,11 @@ class Fourier():
 
     def __init__(self, m, t=2*np.pi, lam=0):
         """
-        :param m:フィッティングする多項式の次数
-        :param t:フーリエ級数の周期
-        :param lam:正則化項の重み
+        param
+        -----
+        * m:フィッティングする多項式の次数
+        * t:フーリエ級数の周期
+        * lam:正則化項の重み
         """
         self.m = m
         self.t = t
