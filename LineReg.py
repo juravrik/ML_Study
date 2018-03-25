@@ -22,7 +22,7 @@ class Fourier():
         """
         計画行列の導出
         """
-        phi = 1/2 * np.ones([len(x), 1])
+        phi = 1/2 * np.ones([x.shape[0], 1])
         for i in range(1, self.m+1):
             sin = np.sin(2.0*np.pi*i*x/self.t)
             cos = np.cos(2.0*np.pi*i*x/self.t)
