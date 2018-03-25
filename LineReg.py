@@ -37,7 +37,7 @@ class Fourier():
         n = self.lam * np.identity(2*self.m+1) + np.dot(design.T, design)
         self.theta = np.dot(np.dot(np.linalg.inv(n), design.T), y)
 
-    def pred(self, x):
+    def predict(self, x):
         """
         予測値の出力
         """
