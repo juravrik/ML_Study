@@ -41,12 +41,13 @@ class LogReg:
         self.theta = np.zeros([x.shape[1], 1])
         pred_cost = self.logloss(x, y).sum()
         for i in range(self.itr):
-            cur_cost = self.logloss(x, y).sum()
-            if (cur_cost > pred_cost).bool():
-                break
 
             tmp = self._sigmoid(x) - y
             self.theta = self.theta - self.alpha * np.dot(x.T, tmp)
+
+            cur_cost = self.logloss(x, y).sum()
+            if (cur_cost > pred_cost).bool():
+                break
 
             pred_cost = cur_cost
 
