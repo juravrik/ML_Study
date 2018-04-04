@@ -38,16 +38,18 @@ class LogisticRegression:
         """
         勾配法によってパラメータを決定
         """
-        self.theta = np.zeros([x.shape[1], 1])
+        self.theta = np.random.rand(x.shape[1], 1)
+        self.theta /= self.theta.max()
         pred_cost = self.logloss(x, y).sum()
         for i in range(self.itr):
-
+            print(pred_cost)
             tmp = self._sigmoid(x) - y
+            print(self.theta)
             self.theta = self.theta - self.alpha * np.dot(x.T, tmp)
 
             cur_cost = self.logloss(x, y).sum()
-            if (cur_cost > pred_cost).bool():
-                break
+            # if cur_cost > pred_cost:
+            #    break
 
             pred_cost = cur_cost
 
@@ -55,6 +57,7 @@ class LogisticRegression:
         """
         予測値の確率出力
         """
+        x = np.ones()
         return self._sigmoid(x)
 
     def predict(self, x):
