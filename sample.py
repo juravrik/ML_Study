@@ -53,13 +53,13 @@ def perseptron():
 
 if __name__ == '__main__':
     sns.set()
-    if '--fourier' in sys.argv:
+    if '--Fourier' in sys.argv:
         fourier()
 
     # if '--logistic' in sys.argv:
     #    logistic()
 
-    if '--perseptron' in sys.argv:
+    if '--Perseptron' in sys.argv:
         perseptron()
 
     # if '--pca' in sys.argv:
