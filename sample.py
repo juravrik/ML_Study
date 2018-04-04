@@ -52,6 +52,9 @@ def perceptron():
 
 
 def pca():
+    '''
+    PCAによる二次元から一次元への次元削減
+    '''
     noize = np.random.normal(loc=0, scale=0.3, size=10)
     x = np.arange(0, 10)
     y = x*0.7+noize
