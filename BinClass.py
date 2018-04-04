@@ -67,7 +67,7 @@ class LogisticRegression:
         return np.where(self._sigmoid(x) > 0.5, 1, 0)
 
 
-class Perseptron:
+class Perceptron:
     """
     SGDによる単層パーセプトロン
     """

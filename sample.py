@@ -1,6 +1,5 @@
 import sys
 import numpy as np
-import pandas as pd
 from matplotlib import pyplot
 import seaborn as sns
 import BinClass
@@ -25,8 +24,9 @@ def fourier():
     pyplot.show()
 
 
-def perseptron():
+def perceptron():
     '''
+    パーセプトロンによる分類
     '''
 
     noize = np.random.normal(loc=0, scale=0.3, size=40).reshape(20, 2)
@@ -41,13 +41,26 @@ def perseptron():
     pyplot.scatter(x[:10, 0], x[:10, 1], marker='x')
     pyplot.scatter(x[10:, 0], x[10:, 1], marker='o')
 
-    clf = BinClass.Perseptron(eta=1, itr=100)
+    clf = BinClass.Perceptron(eta=1, itr=100)
     clf.fit(x, y)
 
     x = np.arange(-0.1, 1, 0.01)
     y = -(clf.w[0]+clf.w[1]*x)/clf.w[2]
     pyplot.plot(x, y, label='Boundary')
 
+    pyplot.show()
+
+
+def pca():
+    noize = np.random.normal(loc=0, scale=0.3, size=10)
+    x = np.arange(0, 10)
+    y = x*0.7+noize
+    pyplot.scatter(x, y, color='red', label='original')
+    X = np.hstack([x.reshape(10, 1), y.reshape(10, 1)])
+    comp = Decompo.PCA(n_components=1)
+    comp.fit(X)
+    X = comp.transform(X)
+    pyplot.scatter(X, np.zeros(10), color='blue', label='composed')
     pyplot.show()
 
 
@@ -59,8 +72,8 @@ if __name__ == '__main__':
     # if '--logistic' in sys.argv:
     #    logistic()
 
-    if '--Perseptron' in sys.argv:
-        perseptron()
+    if '--Perceptron' in sys.argv:
+        perceptron()
 
-    # if '--pca' in sys.argv:
-        # pca()
+    if '--Pca' in sys.argv:
+        pca()
