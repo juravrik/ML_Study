@@ -38,17 +38,17 @@ class LogisticRegression:
         """
         勾配法によってパラメータを決定
         """
-        self.theta = np.random.rand(x.shape[1], 1)
+        self.theta = np.random.rand(x.shape[1]+1, 1)
+        height = x.shape[0]
+        x = np.hstack([np.ones(height).reshape(height, 1), x])
         self.theta /= self.theta.max()
         pred_cost = self.logloss(x, y).sum()
         for i in range(self.itr):
-            print(pred_cost)
             tmp = self._sigmoid(x) - y
-            print(self.theta)
             self.theta = self.theta - self.alpha * np.dot(x.T, tmp)
 
             cur_cost = self.logloss(x, y).sum()
-            # if cur_cost > pred_cost:
+            #if cur_cost > pred_cost:
             #    break
 
             pred_cost = cur_cost
@@ -57,17 +57,20 @@ class LogisticRegression:
         """
         予測値の確率出力
         """
-        x = np.ones()
+        height = x.shape[0]
+        x = np.hstack([np.ones(height).reshape(height, 1), x])
         return self._sigmoid(x)
 
     def predict(self, x):
         """
         予測ラベルの出力
         """
+        height = x.shape[0]
+        x = np.hstack([np.ones(height).reshape(height, 1), x])
         return np.where(self._sigmoid(x) > 0.5, 1, 0)
 
 
-class Perseptron:
+class Perceptron:
     """
     SGDによる単層パーセプトロン
     """
