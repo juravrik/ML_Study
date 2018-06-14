@@ -79,11 +79,14 @@ def pca():
 
 if __name__ == '__main__':
     sns.set()
+
     if '--Fourier' in sys.argv:
         fourier()
-
-    if '--Perceptron' in sys.argv:
+    elif '--Perceptron' in sys.argv:
         perceptron()
-
-    if '--PCA' in sys.argv:
+    elif '--PCA' in sys.argv:
         pca()
+    elif len(sys.argv) > 1:
+        print('No such options')
+    else:
+        print('There are no options')
