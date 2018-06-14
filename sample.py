@@ -5,6 +5,7 @@ import seaborn as sns
 import BinClass
 import LineReg
 import Decompo
+import Clustering
 
 
 def regression_dataset():
@@ -76,6 +77,20 @@ def pca():
     pyplot.scatter(X, np.zeros(10), color='blue', label='composed')
     pyplot.show()
 
+def kmean():
+    X, _ = classification_dataset()
+
+    kmn = Clustering.Kmean(2, 100)
+    label = kmn.fit(X)
+
+    X_a = X[label == 0, :]
+    X_b = X[label == 1, :]
+    pyplot.scatter(X_a[:, 0], X_a[:, 1], color='blue', label='group 1')
+    pyplot.scatter(X_b[:, 0], X_b[:, 1], color='red', label='group 2')
+    pyplot.show()
+    
+
+
 
 if __name__ == '__main__':
     sns.set()
@@ -86,7 +101,12 @@ if __name__ == '__main__':
         perceptron()
     elif '--PCA' in sys.argv:
         pca()
+    elif '--Kmean' in sys.argv:
+        kmean()
     elif len(sys.argv) > 1:
         print('No such options')
     else:
-        print('There are no options')
+        print('--Fourier -> フーリエ級数を基底関数とした回帰')
+        print('--Perceptron -> パーセプトロンによる分類')
+        print('--PCA -> PCAによる次元削減')
+        print('--Kmean -> Kmeansによるクラスタリング')

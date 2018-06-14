@@ -7,17 +7,28 @@ class Kmean:
         self.itr = itr
 
     def _euclid_distance(self, d1, d2):
-        return np.sum(np.sqrt(
+        return np.sqrt(np.abs(np.sum(d1-d2)))
+    
     def fit(self, data):
         self.label = np.random.randint(0, self.num_type, data.shape[0])
 
         for i in range(self.itr):
+            centers = []
             for j in range(self.num_type):
-                self.centers = data[self.label == j].mean(axis=0)
+                centers.append(data[self.label == j].mean(axis=0))
+            tmp = self.label.copy()
+            for j, d in enumerate(data):
+                min_dist=1000000000
+                min_label=None
+                for k, center in enumerate(centers):
+                    dist = self._euclid_distance(d, center) 
+                    if dist < min_dist:
+                        min_dist = dist
+                        min_label = k
+                self.label[j] = min_label
 
-            for j in data:
-                for center in self.centers:
+            if (tmp == self.label).all():
+                return self.label
 
-
-
-
+        return self.label
+    
