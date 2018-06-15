@@ -13,9 +13,7 @@ class Kmean:
         self.label = np.random.randint(0, self.num_type, data.shape[0])
 
         for i in range(self.itr):
-            centers = []
-            for j in range(self.num_type):
-                centers.append(data[self.label == j].mean(axis=0))
+            centers = [data[self.label == j].mean(axis=0) for j in range(self.num_type)]
             tmp = self.label.copy()
             for j, d in enumerate(data):
                 min_dist=1000000000
