@@ -34,12 +34,12 @@ class Fourier():
         正規方程式を用いて正則化最小二乗法を解く
         """
         design = self._CalcDesign(x)
-        n = self.lam * np.identity(2*self.m+1) + np.dot(design.T, design)
-        self.theta = np.dot(np.dot(np.linalg.inv(n), design.T), y)
+        n = self.lam * np.identity(2*self.m+1) + (design.T @ design)
+        self.theta = ((np.linalg.inv(n) @ design.T) @ y)
 
     def predict(self, x):
         """
         予測値の出力
         """
         design = self._CalcDesign(x)
-        return np.dot(design, self.theta)
+        return (design @ self.theta)

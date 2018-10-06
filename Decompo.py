@@ -16,4 +16,4 @@ class PCA:
         self.components = v[:, :self.n_components]
 
     def transform(self, X):
-        return np.dot(X, self.components)
+        return (X @ self.components)

@@ -12,7 +12,7 @@ class Cos:
         l = []
         for i in x:
             def _cossim(a):
-                return (np.dot(a, i)/(np.linalg.norm(i)*np.linalg.norm(a)))**2
+                return ((a @ i)/(np.linalg.norm(i)*np.linalg.norm(a)))**2
 
             d = dict(zip(self.mean_vec.keys(), list(map(_cossim, self.mean_vec.values()))))
             l.append(max(d.items(), key=lambda x:x[1])[0])
@@ -30,7 +30,7 @@ class Maharanobis:
         for i in x:
             def _maha(a):
                 t = np.reshape((i-a), ((i-a).shape[0], 1))
-                return np.sqrt(np.dot(np.dot(t.T, np.linalg.inv(c)), t))
+                return np.sqrt(((t.T @ np.linalg.inv(c)) @ t))
 
             d = dict(zip(self.mean_vec.keys(), list(map(_maha, self.mean_vec.values()))))
             l.append(min(d, key=d.get))

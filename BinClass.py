@@ -40,4 +40,4 @@ class Perceptron:
         予測ラベルの出力
         """
         x = np.hstack([np.ones([x.shape[0], 1]), x])
-        return np.where(np.dot(x, self.w) > 0, 1, 0)
+        return np.where((x @ self.w) > 0, 1, 0)
